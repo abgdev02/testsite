@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import styles from './Navigation.module.css'
+import logoImage from '../../assets/images/logo.png'
 
 export function Navigation() {
   const [activeSection, setActiveSection] = useState('home')
@@ -80,7 +81,8 @@ export function Navigation() {
         <div className={styles.navContent}>
           {/* Logo - Left */}
           <a href="#home" className={styles.logo} aria-label="iembraceland home">
-            iembraceland
+            <img src={logoImage} alt="iEmbraceland logo" className={styles.logoImage} />
+            embraceland
           </a>
           
           {/* Desktop Navigation - Center */}
@@ -123,7 +125,7 @@ export function Navigation() {
               console.log('Purchase clicked!')
             }}
           >
-            Buy iEmbrace
+            Try for free
           </button>
 
           {/* Mobile Menu Button */}

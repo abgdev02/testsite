@@ -35,6 +35,15 @@
   text-decoration: none;
   letter-spacing: var(--typography-letterSpacing-tight);
   text-shadow: none; /* Remove text shadow for clean look */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.logoImage {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
 }
 
 .logo:hover {

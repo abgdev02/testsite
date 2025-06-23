@@ -79,7 +79,7 @@
 /* ROOT Title - Clean and Visible with Semantic Spacing */
 .rootTitle {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: clamp(4rem, 8vw, 8rem);
+  font-size: clamp(2rem, 8vw, 4rem);
   font-weight: 100;
   line-height: 1;
   letter-spacing: 12px;
@@ -164,10 +164,10 @@
   box-shadow: none;
   
   /* Improved contrast for accessibility */
-  color: var(--colors-text-primary) !important;
-  font-size: 1.1rem;
-  font-weight: 600;
-  padding: var(--spacing-5) var(--spacing-8); /* Semantic spacing for button padding */
+  color: var(--colors-text-tertiary) !important;
+  font-size: 1rem;
+  font-weight: 300;
+  padding: var(--spacing-4) var(--spacing-12); /* Semantic spacing for button padding */
   border-radius: 50px;
   cursor: pointer;
   letter-spacing: 0px;
@@ -175,11 +175,10 @@
               border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
               color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   margin: 0; /* Remove margin, use gap from parent */
+  margin-bottom: 40px ;
   position: relative;
   overflow: hidden;
   
-  /* Remove floating animation to prevent any size changes */
-  /* animation: gentleFloat 6s ease-in-out infinite; */
 }
 
 .ctaButton::before {
@@ -222,7 +221,7 @@
   display: flex;
   flex-direction: row;
   gap: 1rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
   position: relative;
   z-index: 15;
 }
