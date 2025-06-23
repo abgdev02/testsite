@@ -4,6 +4,7 @@ import { TabButton } from '../ui/TabButton'
 import mindfulnessIcon from '../../assets/icons/mindfulness 1.svg'
 import rippleIcon from '../../assets/icons/ripple.svg'
 import sineIcon from '../../assets/icons/sine.svg'
+import mindfulImage from '../../assets/images/mindful.jpeg'
 import styles from './TabSection.module.css'
 
 interface TabSectionProps {
@@ -186,7 +187,17 @@ export function TabSection({ isMobile, tabContent }: TabSectionProps) {
           </div>          
           {/* Right image placeholder - Columns 7-12 */}
           <div className={`col-12 md:col-6 ${styles.rightImageColumn} ${isMobile ? styles.mobile : ''}`}>
-            [Image Placeholder 600x400]
+            <img 
+              src={mindfulImage} 
+              alt="Mindful meditation with Root device"
+              style={{
+                width: '100%',
+                height: 'auto',
+                maxWidth: '600px',
+                borderRadius: '8px',
+                objectFit: 'cover'
+              }}
+            />
           </div>
         </div>
       </div>
