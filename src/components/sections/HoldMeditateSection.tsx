@@ -1,3 +1,7 @@
+import immerseImage from '../../assets/images/immerse.jpeg'
+import selectImage from '../../assets/images/select.jpeg'
+import journalImage from '../../assets/images/journal.png'
+
 interface HoldMeditateSectionProps {
   isMobile: boolean
 }
@@ -60,6 +64,7 @@ export function HoldMeditateSection({ isMobile }: HoldMeditateSectionProps) {
       </div>      {/* Bottom Section - Three columns using 12-column grid */}
       <div className={`grid-container ${isMobile ? '' : ''}`} style={{
         width: '100%',
+        marginBottom: '120px',
       }}>        {/* Hold Column - Columns 1-4 */}
         <div className="col-12 md:col-4" style={{
           flexDirection: 'column',
@@ -78,15 +83,25 @@ export function HoldMeditateSection({ isMobile }: HoldMeditateSectionProps) {
             letterSpacing: 1.28,
             wordWrap: 'break-word'
           }}>
-            HOLD
+            SELECT
           </div>
           <div style={{
             width: isMobile ? 180 : 280,
             height: isMobile ? 180 : 280,
             borderRadius: '50%',
-            backgroundColor: '#f8f8f8',
+            overflow: 'hidden',
             border: '1px solid #eee'
-          }}></div>
+          }}>
+            <img 
+              src={selectImage} 
+              alt="Select meditation scene"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover'
+              }}
+            />
+          </div>
           <div style={{
             color: '#8a8a8a',
             fontSize: 16,
@@ -96,7 +111,7 @@ export function HoldMeditateSection({ isMobile }: HoldMeditateSectionProps) {
             lineHeight: 1.5,
             textAlign: 'center'
           }}>
-            Lights activate as it senses your touch
+            Choose a scene to begin your session
           </div>
         </div>        {/* Breathe Column - Columns 5-8 */}
         <div className="col-12 md:col-4" style={{
@@ -116,15 +131,25 @@ export function HoldMeditateSection({ isMobile }: HoldMeditateSectionProps) {
             letterSpacing: 1.28,
             wordWrap: 'break-word'
           }}>
-            BREATHE
+            IMMERSE
           </div>
           <div style={{
             width: isMobile ? 180 : 280,
             height: isMobile ? 180 : 280,
             borderRadius: '50%',
-            backgroundColor: '#f8f8f8',
+            overflow: 'hidden',
             border: '1px solid #eee'
-          }}></div>
+          }}>
+            <img 
+              src={immerseImage} 
+              alt="Immerse meditation experience"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover'
+              }}
+            />
+          </div>
           <div style={{
             color: '#8a8a8a',
             fontSize: 16,
@@ -134,7 +159,7 @@ export function HoldMeditateSection({ isMobile }: HoldMeditateSectionProps) {
             lineHeight: 1.5,
             textAlign: 'center'
           }}>
-            Gently vibrates in patterns inspired by your emotions
+            Feel the immersive view and haptics guide your breath
           </div>
         </div>        {/* Connect Column - Columns 9-12 */}
         <div className="col-12 md:col-4" style={{
@@ -154,15 +179,25 @@ export function HoldMeditateSection({ isMobile }: HoldMeditateSectionProps) {
             letterSpacing: 1.28,
             wordWrap: 'break-word'
           }}>
-            CONNECT
+            JOURNAL
           </div>
           <div style={{
             width: isMobile ? 180 : 280,
             height: isMobile ? 180 : 280,
             borderRadius: '50%',
-            backgroundColor: '#f8f8f8',
+            overflow: 'hidden',
             border: '1px solid #eee'
-          }}></div>
+          }}>
+            <img 
+              src={journalImage} 
+              alt="Journal and reflect on meditation"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover'
+              }}
+            />
+          </div>
           <div style={{
             color: '#8a8a8a',
             fontSize: 16,
@@ -172,7 +207,7 @@ export function HoldMeditateSection({ isMobile }: HoldMeditateSectionProps) {
             lineHeight: 1.5,
             textAlign: 'center'
           }}>
-            iEmbrace app helps to reflect, track, and grow with Root
+            Reflect and save your thoughts post-session
           </div>
         </div>
       </div>
