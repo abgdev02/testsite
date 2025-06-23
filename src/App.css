@@ -1,0 +1,394 @@
+/* ====================  GLOBAL  ==================== */
+html,
+body{
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: var(--typography-fontFamily-primary);
+  
+  /* Performance optimizations for smooth scrolling */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+#root {
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+  
+  /* Additional performance optimizations */
+  will-change: scroll-position;
+  contain: layout style paint;
+}
+
+/* ====================  ACCESSIBILITY  ==================== */
+/* Skip link for keyboard navigation */
+.skip-link {
+  position: absolute !important;
+  top: -40px;
+  left: var(--spacing-2);
+  background: var(--colors-text-primary);
+  color: var(--colors-text-inverse);
+  padding: var(--spacing-2) var(--spacing-3);
+  text-decoration: none;
+  border-radius: 0 0 var(--borderRadius-base) var(--borderRadius-base);
+  z-index: var(--z-skipLink);
+  font-family: var(--typography-fontFamily-primary);
+  font-size: var(--typography-fontSize-sm);
+  font-weight: var(--typography-fontWeight-semibold);
+  transition: top var(--animation-duration-fast) var(--animation-easing-easeOut);
+  outline: var(--a11y-focus-width) solid transparent;
+  outline-offset: var(--a11y-focus-offset);
+}
+
+.skip-link:focus {
+  top: 0 !important;
+  outline: var(--a11y-focus-width) solid var(--colors-semantic-warning);
+  outline-offset: var(--a11y-focus-offset);
+}
+
+/* Enhanced focus indicators - Lavender Theme */
+:focus {
+  outline: var(--a11y-focus-width) solid var(--colors-border-focus);
+  outline-offset: var(--a11y-focus-offset);
+}
+
+/* Exception for custom styled elements - Lavender Theme */
+button:focus,
+.tab-button:focus {
+  outline: var(--a11y-focus-width) solid var(--colors-border-focus);
+  outline-offset: var(--a11y-focus-offset);
+  box-shadow: 0 0 0 var(--spacing-1) rgba(104, 101, 191, 0.2);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .skip-link {
+    border: var(--a11y-focus-width) solid currentColor;
+  }
+  
+  :focus {
+    outline-width: 3px;
+  }
+}
+
+/* Reduced motion support - already implemented but enhanced */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  /* Keep skip link transition for usability */
+  .skip-link {
+    transition: none;
+  }
+}
+
+/* ====================  HERO WRAPPER  ==================== */
+.heroWrapper{
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+  /* static wash behind the moving blobs - Lavender Theme */
+  background: linear-gradient(
+    180deg,
+    var(--colors-wellness-lavender-light) 0%,
+    var(--colors-wellness-lavender-soft) 22%,
+    var(--colors-wellness-accent-pink) 44%,
+    var(--colors-wellness-lavender-medium) 66%,
+    var(--colors-wellness-lavender-vibrant) 100%
+  );
+  isolation: isolate;                     /* keep pseudo blurs inside */
+  
+  /* Performance optimizations */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+  contain: layout style paint;
+}
+
+/* ------------ blurred "mesh-gradient" blobs ------------ */
+
+/* master blob swirl - Lavender Theme */
+.heroWrapper::before{
+  content: "";
+  position: absolute;
+  inset: -35%;
+  background: conic-gradient(
+    from 0deg,
+    var(--colors-wellness-lavender-soft),
+    var(--colors-wellness-accent-pink),
+    var(--colors-wellness-lavender-medium),
+    var(--colors-wellness-lavender-vibrant),
+    var(--colors-wellness-lavender-deep),
+    var(--colors-wellness-lavender-soft)
+  );
+  border-radius: var(--borderRadius-full);
+  filter: blur(200px);
+  opacity: .25;
+  animation: spinCW var(--animation-duration-slower) linear infinite;
+  z-index:-2;
+}
+
+/* counter-swirl for richer "mesh" feel - Lavender Theme */
+.heroWrapper::after{
+  content:"";
+  position:absolute;
+  inset:-45%;
+  background:conic-gradient(
+    from 0deg,
+    var(--colors-wellness-lavender-medium),
+    var(--colors-wellness-lavender-vibrant),
+    var(--colors-wellness-lavender-deep),
+    var(--colors-wellness-accent-purple),
+    var(--colors-wellness-accent-pink),
+    var(--colors-wellness-lavender-medium)
+  );
+  border-radius:50%;
+  filter:blur(220px);
+  opacity:.2;
+  animation:spinCCW 70s linear infinite;
+  mix-blend-mode:overlay;               /* makes colours fuse softly */
+  z-index:-3;
+}
+
+@keyframes spinCW{to{transform:rotate(360deg);} }
+@keyframes spinCCW{to{transform:rotate(-360deg);}}
+
+/* ====================  THREE CANVAS  ==================== */
+.heroCanvas{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  
+  /* Performance optimizations for 3D canvas */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+  contain: layout style paint;
+}
+
+/* ====================  HERO TEXT BLOCK - Lavender Theme ==================== */
+.heroContent{
+  position:absolute;
+  top:72%;
+  left:50%;
+  transform:translate(-50%,-55%);
+  text-align:center;
+  color: var(--colors-text-primary);
+  max-width:680px;
+  z-index:1;
+}
+.heroContent h1{margin:0 0 1rem;font:700 4rem/1.05 "Source Sans Pro",sans-serif;}
+.heroContent p{margin:0 0 1.8rem;font:400 1.05rem/1.6 "Source Sans Pro",sans-serif;opacity:.86;}
+.heroContent button{
+  padding:.9rem 2.6rem;
+  font-size:1rem;
+  background:#003b5e;
+  color:#fff;
+  border:0;
+  border-radius:9999px;
+  font-weight:600;
+  cursor:pointer;
+  transition:transform .2s;
+}
+.heroContent button:hover{transform:translateY(-2px);}
+
+/* ====================  NAVBAR  ==================== */
+.nav{
+  position:fixed;
+  inset:0 0 auto 0;
+  height:64px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 1.5rem;
+  backdrop-filter:blur(20px) saturate(180%);
+  background:rgba(255,255,255,0.1);
+  border-bottom:1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  z-index:100;
+  transition: all 0.3s ease;
+}
+
+/* Navbar on white background (scrolled state) */
+.nav.scrolled {
+  backdrop-filter:blur(20px) saturate(180%);
+  background:rgba(255,255,255,0.8);
+  border-bottom:1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+.nav .logo{
+  font-size:1.2rem;
+  font-weight:600;
+  color:#003b5e;
+  text-shadow: 0 2px 4px rgba(0,59,94,0.1);
+}
+.nav .links{display:flex;gap:2rem;}
+.nav .links a{
+  color:#003b5e;
+  padding:.75rem 1rem;
+  font-weight:500;
+  border-radius:12px;
+  text-decoration:none;
+  transition:all 0.3s ease;
+  backdrop-filter:blur(10px);
+  text-shadow: 0 1px 2px rgba(0,59,94,0.1);
+}
+.nav .links a:hover{
+  background:rgba(255,255,255,0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 2px rgba(0,59,94,0.15);
+}
+
+/* ====================  SCROLL CUE  ==================== */
+.scrollCue{
+  position:absolute;
+  bottom:4vh;
+  left:50%;
+  transform:translateX(-50%);
+  width:22px;
+  height:34px;
+  stroke:#003b5e;
+  stroke-width:2;
+  fill:none;
+  opacity:.55;
+  animation:upDown 2s ease-in-out infinite;
+  z-index:1;
+}
+@keyframes upDown{
+  0%,100%{transform:translate(-50%,0);}
+  50%{transform:translate(-50%,6px);}
+}
+
+/* ====================  RESPONSIVE  ==================== */
+@media(max-width:767px){
+  .nav{
+    height:56px;
+    padding:0 1rem;
+    backdrop-filter:blur(16px) saturate(160%);
+    background:rgba(255,255,255,0.12);
+  }
+  .nav .links{gap:1rem;font-size:.9rem;}
+  .heroContent h1{font-size:2.2rem;}
+  .heroContent p{font-size:.95rem;}
+  .heroContent button{padding:.7rem 1.8rem;}
+}
+@media(max-width:480px){
+  .heroContent{max-width:88%;}
+  .heroContent h1{font-size:1.8rem;}
+  .heroContent button{width:100%;}
+  .nav .links{display:none;}
+  .nav{
+    backdrop-filter:blur(14px) saturate(150%);
+    background:rgba(255,255,255,0.15);
+  }
+}
+
+/* Large screen optimizations */
+@media(min-width:1200px){
+  .section:not(.heroWrapper) {
+    padding: 120px 120px;
+  }
+  
+  /* Ensure buttons are clickable on large screens */
+  button {
+    pointer-events: auto !important;
+    z-index: 10 !important;
+  }
+}
+
+/* Removed problematic media query that caused alignment issues on large screens */
+
+/* ====================  REMOVED OLD SECTION STYLING  ==================== */
+/* Old section styling removed to prevent conflicts with individual section styles */
+
+/* Special spacing for full-width sections like ImmerseSection */
+main section#immerse {
+  margin-bottom: 0; /* ImmerseSection handles its own spacing */
+}
+
+/* ====================  LOADING ANIMATIONS - CLEANED  ==================== */
+.component-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 200px;
+  color: var(--colors-text-primary);
+  font-family: var(--typography-fontFamily-primary);
+  font-size: var(--typography-fontSize-sm);
+  opacity: 0.7;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--colors-primary-200);
+  border-top: 2px solid var(--colors-primary-600);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ====================  SIMPLE CONSISTENT LAYOUT  ==================== */
+/* Simple approach: consistent max-width and padding for all content sections */
+.content-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-left: var(--spacing-20);
+  padding-right: var(--spacing-20);
+}
+
+/* Sections should be seamless with no gaps */
+
+/* Ensure main sections have no gaps and consistent white background */
+main {
+  background: #ffffff;
+}
+
+section {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  background: #ffffff; /* White background for all sections */
+}
+
+/* Hero section keeps its gradient background */
+section#home {
+  background: none; /* Let HeroSection handle its own background */
+}
+
+/* Video slider section has no background */
+section#immerse {
+  background: none; /* Transparent for video slider */
+}
+
+/* Mobile responsive for content containers */
+@media (max-width: 768px) {
+  .content-container {
+    padding-left: var(--spacing-5);
+    padding-right: var(--spacing-5);
+  }
+}
