@@ -279,12 +279,9 @@ export function ImmerseSection({ isMobile: _ }: ImmerseSectionProps) {
         
         <div className={styles.videoFilter} />
       </div>      {/* Content */}
-      <div className={styles.content}>
-        {/* Text Content */}
-        <div className={styles.textContent}>
-          <h2 className={styles.title}>IMMERSE YOURSELF</h2>
-          <p className={styles.subtitle}>
-            Experience tranquil environments designed to deepen your meditation practice
+      <div className={styles.content}>        {/* Text Content */}
+        <div className={styles.textContent}>          <p className={styles.subtitle}>
+            Experience environments designed to deepen meditation
           </p>
         </div>{/* Video Navigation Boxes - Simple and clean */}
         <div className={styles.videoNavigationBoxes}>
